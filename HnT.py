@@ -1,17 +1,12 @@
 import random
-import time
+import tkinter as tk
 import sys
-def CT():
-    trials: int = int(input("How many trials?: "))
+def Other():
+    trials:int= int(e1.get())
+    w.destroy()
     if trials <= 0:
         sys.exit("invalid input!")
     else:
-        print("Loading...")
-        for i in range(101):
-            print(i,"%")
-            i = i+1
-            time.sleep(0.1)
-        print("Loaded!")
         i = 0
         Head: int = 0
         Tails: int = 0
@@ -28,5 +23,22 @@ def CT():
                 sys.exit("Internal error!")
             i= i+1
         print("done")
-        print("Heads appeard: ",Head," times!")
-        print("Tails appeared: ",Tails," times!")
+        a=str(Head)
+        b=str(Tails)
+        #WINDOW TIME!!!
+        root = tk.Tk()
+        root.title("Results")
+        heads = tk.Label(root,text = ("Heads appeard "+a+" times!")).pack()
+        tails = tk.Label(root,text = ("Tails appeared "+b+" times!")).pack()
+        button = tk.Button(root,text = "Quit", command =lambda:exit(0)).pack()
+        root.mainloop()
+def CT():
+    global w 
+    w = tk.Tk()
+    label = tk.Label(w, text ="Number of trials: ")
+    global e1
+    e1= tk.Entry(w)
+    e1.grid(column ="1",row = "1")
+    label.grid(column="1",row ="0")
+    button = tk.Button(w,text = "Enter",command=lambda:Other()).grid(column="1",row="2")
+    w.mainloop()
